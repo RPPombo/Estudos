@@ -1,0 +1,16 @@
+SELECT "Ano/Mes",
+SUM(CASE WHEN Nome_Fornecedor == 'NebulaNetworks' THEN Qtd_Vendas ELSE 0 END) AS "Qtd_NebulaNetworks",
+SUM(CASE WHEN Nome_Fornecedor == 'HorizonDistributors' THEN Qtd_Vendas ELSE 0 END) AS "Qtd_HorizonDistributors",
+SUM(CASE WHEN Nome_Fornecedor == 'AstroSupply' THEN Qtd_Vendas ELSE 0 END) AS "Qtd_AstroSupply"
+FROM(
+	SELECT strftime('%Y/%m', v.data_venda) AS "Ano/Mes", f.nome AS 'Nome_Fornecedor', COUNT(iv.produto_id) AS 'Qtd_Vendas'
+	from itens_venda iv
+	JOIN vendas v ON v.id_venda = iv.venda_id
+	JOIN produtos p ON p.id_produto = iv.produto_id
+	JOIN fornecedores f ON f.id_fornecedor = p.fornecedor_id
+	WHERE Nome_Fornecedor = 'NebulaNetworks' OR Nome_Fornecedor = 'HorizonDistributors' OR Nome_Fornecedor = 'AstroSupply'
+	GROUP BY Nome_Fornecedor, "Ano/Mes"
+	ORDER BY 'Ano/Mes', Qtd_Vendas)
+GROUP BY "Ano/Mes";
+
+--A função CASE WHEN serve para criar uma condicional em uma consulta em que se ela for cumprida será retornado o que estiver na cláusula THEN e caso não seja será retornado o que estiver na cláusula ELSE
