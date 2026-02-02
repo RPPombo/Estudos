@@ -2,14 +2,17 @@
 #include <string>
 #include <map>
 #include <vector>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-const string PALAVRA_SECRETA = "MELANCIA";
+string palavra_secreta;
 map <char, bool> chutou; // O map é uma estrutura de dicionário, funcionando com chave/valor
 vector <char> chutes_errados; // O vector é um vetor dinâmico
 
 bool letra_existe(char chute) {
-    for (char letra : PALAVRA_SECRETA) { // A partir do C++11 é possível iterar uma palavra da maneira como está no código ao invés de for (int i=0; i < PALAVRA_SECRETA.size(); i++)
+    for (char letra : palavra_secreta) { // A partir do C++11 é possível iterar uma palavra da maneira como está no código ao invés de for (int i=0; i < palavra_secreta.size(); i++)
         if (chute == letra){
             return true;
         }
@@ -19,7 +22,7 @@ bool letra_existe(char chute) {
 }
 
 bool acertou_palavra() {
-    for (char letra : PALAVRA_SECRETA) {
+    for (char letra : palavra_secreta) {
         if (!chutou[letra]) {
             return false;
         }
@@ -41,7 +44,7 @@ void mostra_erros() {
 }
 
 void mostra_palavra() {
-    for (char letra : PALAVRA_SECRETA) {
+    for (char letra : palavra_secreta) {
             if (chutou[letra]) {
                 cout << letra << " ";
             } else {
@@ -69,8 +72,74 @@ void chuta() {
     cout << endl;
 }
 
+vector<string> le_arquivo() {
+    ifstream arquivo;
+
+    arquivo.open("palavras.txt"); // Abertura de aqrquivo
+
+    if (!arquivo.is_open()){ // Verficando se o arquivo está aberto
+        cout << "Erro na leitura do arquivo de palavras." << endl;
+        exit(1);
+    }
+
+    int quantidade_palavras;
+    arquivo >> quantidade_palavras;
+
+    vector<string> lista;
+    string palavra;
+
+    for (int linha=0; linha<quantidade_palavras; linha++){
+        arquivo >> palavra;
+        lista.push_back(palavra);
+    }
+
+    arquivo.close();
+
+    return lista;
+}
+
+void escolhe_palavra() {
+    vector <string> palavras = le_arquivo();
+
+    srand(time(NULL));
+    int indice = rand() % palavras.size();
+
+    palavra_secreta = palavras[indice];
+}
+
+void escrever_arquivo(vector <string> nova_lista) {
+    ofstream arquivo;
+    arquivo.open("palavras.txt");
+
+    if (arquivo.is_open()){
+        arquivo << nova_lista.size() << endl;
+
+        for (string palavra : nova_lista){
+            arquivo << palavra << endl;
+        }
+    } else {
+        cout << "Erro na abertura do arquivo de palavras." << endl;
+    }
+
+    arquivo.close();
+}
+
+void adiciona_palavra(){
+    cout << "Digite a nova palavra em letras maiúsculas:";
+    string palavra_nova;
+    cin >> palavra_nova;
+
+    vector <string> lista_palavras = le_arquivo();
+
+    lista_palavras.push_back(palavra_nova);
+
+    escrever_arquivo(lista_palavras);
+}
+
 int main() {
     cout << "Bem-vindo ao jogo da forca!" << endl;
+
+    escolhe_palavra();
 
     while (!acertou_palavra() && !enforcou()) {
         mostra_erros();
@@ -79,13 +148,21 @@ int main() {
 
         chuta();
     }
+
+    cout << "Palavra secreta: " << palavra_secreta << endl << endl;
+
     if (enforcou()) {
         cout << "Que pena! Tente novamente!" << endl;
     } else {
         cout << "Parabéns! Você acertou a palavra secreta!" << endl;
-    }
+        cout << "Deseja adicionar uma nova palavra? (S/N)" << endl;
+        char resposta;
+        cin >> resposta;
 
-    cout << "Palavra secreta: " << PALAVRA_SECRETA << endl << endl;
+        if (resposta == 'S') {
+            adiciona_palavra();
+        }
+    }
 
     cout<< "Fim de Jogo!" << endl;
 }
