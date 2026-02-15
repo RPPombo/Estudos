@@ -1,7 +1,7 @@
 CXX= g++
 CXXFLAGS= -std=c++11 -Wall -Wextra
 TARGET= JogoDaForca
-SRC = JogoDaForca.cpp
+SRC = *.cpp
 
 all: $(TARGET)
 

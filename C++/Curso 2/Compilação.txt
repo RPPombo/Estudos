@@ -1,0 +1,13 @@
+A compilação de um arquivo funciona separada em duas etapas:
+
+1ª => Compilação: faz com que o arquivo .cpp se transforme em um arquivo .o, que é equivalente a um arquivo de "objeto", gerando um código de objeto para cada arquivo.
+      Comando: g++ -c {Nome do arquivo}.cpp
+      Resultado: {Nome do arquivo}.o
+
+2ª => Linking: coleta os arquivos "objeto" e junta eles, utilizando os códigos de objetos gerados anteriormente.
+      Comando: g++ {Nome do arquivo}.o -o {Nome do programa}.exe
+      Resultado: {Nome do programa}.exe
+
+Fazer esse processo é muito útil para projetos grandes, pois quando a alteração é em poucos arquivos, não será necessário compilar os arquivos inalterados, apenas linkar aos novos.
+
+Link para explicação mais detalhada: "https://faculty.cs.niu.edu/~mcmahon/CS241/Notes/build.html".
