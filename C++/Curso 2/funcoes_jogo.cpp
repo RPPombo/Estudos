@@ -1,14 +1,12 @@
 #include "funcoes_jogo.hpp"
 
-// A definição extern faz com que o compilador entenda que a váriavel não vai ser definida nesse arquivo
+/* A definição extern faz com que o compilador entenda que a váriavel não vai ser definida nesse arquivo
 extern std::map <char,bool> chutou;
 extern std::vector <char> chutes_errados;
+*/
 
-bool enforcou() {
-    return chutes_errados.size() >= 5;
-}
-
-void mostra_erros() {
+// Para melhorar o gerenciamento de memória é possível enviar por meio de uma referência o valor de uma variável sem precisar derefenciá-la ao enviar um pointeiro
+void mostra_erros(const std::vector <char>& chutes_errados) {
     std::cout << "Chutes errados: ";
         for (char letra : chutes_errados) {
             std::cout << letra << " ";
@@ -16,7 +14,7 @@ void mostra_erros() {
     std::cout << std::endl;
 }
 
-void chuta() {
+void chuta(std::map <char, bool>& chutou, std::vector <char>& chutes_errados, const std::string& palavra_secreta) {
     char chute;
     std::cout << "Faça seu chute: ";
     std::cin >> chute;
@@ -25,7 +23,7 @@ void chuta() {
 
     std::cout << "\nChute: " << chute << std::endl;
 
-    if (letra_existe(chute)) {
+    if (letra_existe(palavra_secreta ,chute)) {
         std::cout << "A letra existe na palavra" << std::endl;
     } else {
         std::cout << "A letra não existe na palavra" << std::endl;

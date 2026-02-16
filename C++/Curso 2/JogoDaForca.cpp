@@ -5,21 +5,21 @@ std::map <char,bool> chutou;
 std:: vector <char> chutes_errados;
 
 int main() {
-    std::cout << "Bem-vindo ao jogo da forca!" << std::endl;
+    imprime_cabecalho();
 
-    escolhe_palavra();
+    palavra_secreta = escolhe_palavra();
 
-    while (!acertou_palavra() && !enforcou()) {
-        mostra_erros();
+    while (!acertou_palavra(palavra_secreta, chutou) && !enforcou(chutes_errados)) {
+        mostra_erros(chutes_errados);
 
-        mostra_palavra();
+        mostra_palavra(palavra_secreta, chutou);
 
-        chuta();
+        chuta(chutou, chutes_errados, palavra_secreta);
     }
 
     std::cout << "Palavra secreta: " << palavra_secreta << std::endl << std::endl;
 
-    if (enforcou()) {
+    if (enforcou(chutes_errados)) {
         std::cout << "Que pena! Tente novamente!" << std::endl;
     } else {
         std::cout << "Parabéns! Você acertou a palavra secreta!" << std::endl;

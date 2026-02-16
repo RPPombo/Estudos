@@ -7,10 +7,10 @@
 #include <cstdlib>
 #include "funcoes_arquivo.hpp"
 
-void escolhe_palavra();
+std::string escolhe_palavra();
 
-bool acertou_palavra();
+bool acertou_palavra(const std::string& palavra_secreta, const std::map<char, bool>& chutou);
 
-void mostra_palavra();
+void mostra_palavra(const std::string& palavra_secreta, const std::map <char,bool>& chutou);
 
-bool letra_existe(char chute);
+bool letra_existe(const std::string& palavra_secreta ,char chute);
