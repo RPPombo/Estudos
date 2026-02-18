@@ -1,8 +1,13 @@
 #include "JogoDaForca.hpp"
 
-std::string palavra_secreta;
-std::map <char,bool> chutou;
-std:: vector <char> chutes_errados;
+// Essa parte serve para que o compilador procure funções que ele desconhece por não estarem em arquivos do projeto, em namespaces específicos
+// É possível usar namespace a = std
+using namespace Forca;
+
+// O static nesse contexto faz com que as variáveis globais existam apenas na unidade de tradução que elas estão, ou seja ela não "existem" para outros arquivos
+static std::string palavra_secreta;
+static std::map <char,bool> chutou;
+static std:: vector <char> chutes_errados;
 
 int main() {
     imprime_cabecalho();
