@@ -7,24 +7,25 @@ using namespace Forca;
 // O static nesse contexto faz com que as variáveis globais existam apenas na unidade de tradução que elas estão, ou seja ela não "existem" para outros arquivos
 static std::string palavra_secreta;
 static std::map <char,bool> chutou;
-static std:: vector <char> chutes_errados;
+static std:: array <char, 5> chutes_errados; // O array diferente do vector é alocado na stack do programa e o vector na heap, fazendo assim com que o array seja menos custoso computacionalmente
+static int contador_chutes;
 
 int main() {
     imprime_cabecalho();
 
     palavra_secreta = escolhe_palavra();
 
-    while (!acertou_palavra(palavra_secreta, chutou) && !enforcou(chutes_errados)) {
-        mostra_erros(chutes_errados);
+    while (!acertou_palavra(palavra_secreta, chutou) && !enforcou(contador_chutes)) {
+        mostra_erros(chutes_errados, contador_chutes);
 
         mostra_palavra(palavra_secreta, chutou);
 
-        chuta(chutou, chutes_errados, palavra_secreta);
+        chuta(chutou, chutes_errados, contador_chutes, palavra_secreta);
     }
 
     std::cout << "Palavra secreta: " << palavra_secreta << std::endl << std::endl;
 
-    if (enforcou(chutes_errados)) {
+    if (enforcou(contador_chutes)) {
         std::cout << "Que pena! Tente novamente!" << std::endl;
     } else {
         std::cout << "Parabéns! Você acertou a palavra secreta!" << std::endl;
