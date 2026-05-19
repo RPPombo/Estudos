@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	exercicios.Exercicio_4()
+	exercicios.Exercicio_6()
 }
