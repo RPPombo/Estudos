@@ -1,5 +1,9 @@
 package main
 
+import (
+	"capitulo_8/exercicios"
+)
+
 func main() {
-	Fatiar_slices()
+	exercicios.Exercicio_10()
 }

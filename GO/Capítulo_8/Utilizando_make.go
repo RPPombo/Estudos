@@ -16,6 +16,16 @@ func Utilizar_make() {
 
 	slice = append(slice, 6)
 	fmt.Println(slice)
+
+	// É possível criar slices de slices, funcionando como se fosse uma matriz
+	ss := [][]int{
+		[]int{1, 2, 3},
+		[]int{4, 5, 6},
+		[]int{7, 8, 9},
+	}
+
+	fmt.Println(ss)
 }
 
 // Caso o len se torne maior que o cap, automaticamente o cap vai ser dobrado para manter o funcionamento da função make()
+// Uma situação importante é que caso uma slice nova seja composta de slices de uma outra e a original tiver espaço, o espçao de memória será utilizado para a nova
