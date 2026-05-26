@@ -1,5 +1,9 @@
 package main
 
+import (
+	"capitulo_18/exercicios"
+)
+
 func main() {
-	Utilizando_mutex()
+	exercicios.Exercicio_6()
 }
