@@ -1,5 +1,9 @@
 package main
 
+import (
+	"capitulo_21/exercicios"
+)
+
 func main() {
-	Basico_de_context()
+	exercicios.Exercicio_7()
 }
