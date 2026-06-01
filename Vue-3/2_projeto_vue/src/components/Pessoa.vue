@@ -1,23 +1,24 @@
 <template>
     <div>
-        <h2>Esta é a descrição da pessoa: {{ nome }}</h2> 
-        <p>Estou trabalhando no momento.</p>
-        <p>Sei as seguintes linguagens de programação:</p>
-        <ul>
-        <li>Python</li>
-            <li>C</li>
-            <li>Go</li>
-            <li>SQL</li>
-        </ul>
+        <h2>Esta é a descrição da pessoa: {{ nome }}</h2>
+        <Info :compEmail="email"/>
+        <Form />
     </div>
 </template>
 
 <script>
+    import Info from './Info.vue';
+    import Form from './Form.vue';
     export default {
         name: 'Pessoa',
+        components: {
+            Info,
+            Form
+        },
         data() {
             return {
-                nome: 'Rodrigo'
+                nome: 'Rodrigo',
+                email: 'auxiliar@email.com'
             }
         }
     }
