@@ -78,6 +78,20 @@
     }
   ],
   "burgers": [
-    
+    {
+      "nome": "Carlos",
+      "carne": "Picanha",
+      "pao": "Italiano Branco",
+      "opcionais": [
+        "Bacon",
+        "Salame",
+        "Cebola roxa",
+        "Pepino",
+        "Tomate",
+        "Cheddar"
+      ],
+      "status": "Em produção",
+      "id": 1
+    }
   ]
 }
