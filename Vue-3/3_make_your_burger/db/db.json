@@ -92,6 +92,18 @@
       ],
       "status": "Em produção",
       "id": 1
+    },
+    {
+      "nome": "Sofia",
+      "carne": "Alcatra",
+      "pao": "3 Queijos",
+      "opcionais": [
+        "Cheddar",
+        "Tomate",
+        "Cebola roxa"
+      ],
+      "status": "Em produção",
+      "id": 3
     }
   ]
 }
